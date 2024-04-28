@@ -15,7 +15,7 @@ function getOptions(): Options {
 	}
 	return {
 		budgetPercentIncreaseRed: Number.parseInt(
-			getInput("budget_percent_increase_red") || "20",
+			getInput("percent_extra_attention") || "20",
 			10,
 		),
 		showDetails: ["true", "True", "TRUE"].includes(

@@ -36,7 +36,7 @@ inputs:
     default: ".analyzer"
     description: |
       A path to working directory where bundle analysis are stored.
-  budget_percent_increase_red:
+  percent_extra_attention:
     required: false
     default: "20"
     description: |
@@ -67,7 +67,7 @@ runs:
         INPUT_METAFILES: ${{ inputs.metafiles }}
         INPUT_NAME: ${{ inputs.name }}
         INPUT_ANALYZE_DIRECTORY: ${{ inputs.analyze_directory }}
-        INPUT_BUDGET_PERCENT_INCREASE_RED: ${{ inputs.budget_percent_increase_red }}
+        INPUT_PERCENT_EXTRA_ATTENTION: ${{ inputs.percent_extra_attention }}
         INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
       run: |
         node ${{ github.action_path }}/dist/index.mjs
