@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+node_modules
+out
+
+# Allow-list
+!__tests__/__fixtures__/examples-with-base/**/.analyzer/base/bundle/bundle_analysis.json
+!__tests__/__fixtures__/examples-with-base/*/.analyzer/base/bundle/bundle_analysis.json

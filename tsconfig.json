@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "module": "es2022",
+    "target": "es2022",
+    "allowJs": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "moduleResolution": "Bundler",
+    "sourceMap": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "types": ["vitest/globals", "node"],
+    "baseUrl": "."
+  },
+  "include": [
+    "src",
+    "__tests__"
+  ]
+}

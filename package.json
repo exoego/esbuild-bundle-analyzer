@@ -1,0 +1,40 @@
+{
+  "name": "esbuild-bundle-analyzer",
+  "version": "0.5.0",
+  "description": "Analyzes each PR's impact on esbuild bundle size",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "build": "npm run check && node esbuild.mjs",
+    "check": "biome check --apply ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esbio;d/nextjs-bundle-analysis.git"
+  },
+  "keywords": [
+    "lambda",
+    "esbuild",
+    "bundle",
+    "analysis",
+    "github",
+    "action"
+  ],
+  "author": "TATSUNO Yasuhiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/exoego/esbuild-bundle-analysis/issues"
+  },
+  "homepage": "https://github.com/exoego/esbuild-bundle-analysis#readme",
+  "dependencies": {
+    "filesize": "^10.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@biomejs/biome": "^1.7.1",
+    "esbuild": "^0.20.2",
+    "vitest": "^1.5.0",
+    "typescript": "^5.4.5"
+  }
+}

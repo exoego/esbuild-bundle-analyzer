@@ -1,0 +1,16 @@
+{
+	"name": "esbuild-bundle-analysis-test-fixture",
+	"version": "1.0.0",
+	"description": "test",
+	"dependencies": {
+		"hono": "4.2.7",
+		"@aws-sdk/client-s3": "3.556.0"
+	},
+	"devDependencies": {
+		"esbuild": "0.20.2",
+		"typescript": "^5.4.5"
+	},
+	"scripts": {
+		"build": "node esbuild.mjs"
+	}
+}

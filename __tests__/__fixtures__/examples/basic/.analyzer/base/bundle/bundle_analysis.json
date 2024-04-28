@@ -1,0 +1,7 @@
+{
+  "out/meta.json -> out/index.mjs": {
+    "bytes": 732981,
+    "metafile": "out/meta.json",
+    "outfile": "out/index.mjs"
+  }
+}

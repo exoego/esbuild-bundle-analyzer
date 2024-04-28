@@ -1,0 +1,27 @@
+{
+  "out/meta1.json -> out/no-change.js": {
+    "bytes": 732985,
+    "metafile": "out/meta1.json",
+    "outfile": "out/no-change.js"
+  },
+  "out/meta2.json -> out/bit-increased.js": {
+    "bytes": 44878,
+    "metafile": "out/meta2.json",
+    "outfile": "out/bit-increased.js"
+  },
+  "out/meta2.json -> out/much-increased.js": {
+    "bytes": 44881,
+    "metafile": "out/meta2.json",
+    "outfile": "out/much-increased.js"
+  },
+  "out/meta2.json -> out/decreased.js": {
+    "bytes": 44866,
+    "metafile": "out/meta2.json",
+    "outfile": "out/decreased.js"
+  },
+  "out/meta2.json -> out/new-outfile.js": {
+    "bytes": 160,
+    "metafile": "out/meta2.json",
+    "outfile": "out/new-outfile.js"
+  }
+}

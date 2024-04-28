@@ -1,0 +1,123 @@
+name: esbuild-bundle-analyzer
+description: Analyzes each PR's impact on esbuild bundle size
+inputs:
+  name:
+    required: false
+    default: ${{ github.event.repository.name }}
+    description: |
+      The name of the project. This will be used in the comment header.
+  metafiles:
+    required: true
+    description: |
+      A comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]). Must be non-empty.
+      
+      As of esbuild v0.20.0, you need to write the meta file by yourself after build, something like this:
+      
+      ```javascript
+      import * as esbuild from 'esbuild'
+      import fs from 'node:fs'
+      
+      let result = await esbuild.build({
+        entryPoints: ['src/app1.js', 'src/app2.js'],
+        bundle: true,
+        metafile: true,
+        outdir: 'dist',
+      })
+      
+      fs.writeFileSync('dist/meta.json', JSON.stringify(result.metafile))
+      ```
+      
+      In this case, the `metafiles` config should be `"dist/meta.json"`.
+      
+      Typically, you only need one meta file since one meta file can contain multiple out files information.
+      Multiple meta files may be useful for more complex scenarios.
+  analyze_directory:
+    required: false
+    default: ".analyzer"
+    description: |
+      demo
+  budget_percent_increase_red:
+    required: false
+    default: 20
+    description: |
+      If an out file size has increased more than this percent, display a "‼️" to draw attention
+      to the change.
+  show_details:
+    required: false
+    default: true
+    description: |
+      This option renders a collapsed "details" section explaining some of the finer details of
+      the numbers provided and icons. If you feel like this is not necessary and you and/or those working on your project
+      understand the details, you can set this option to `false` and that section will not render.
+  skip_comment_if_empty:
+    required: false
+    default: true
+    description: |
+      When set to `true`, if no out files have changed size, the generated comment will be an
+      empty string.
+
+runs:
+  using: composite
+  steps:
+    - name: Download base branch bundle stats
+      uses: dawidd6/action-download-artifact@v3
+      # Ok to continue on error since the base branch has no bundle analysis artifact for the first setup
+      continue-on-error: true
+      if: success() && github.event.number
+      with:
+        branch: ${{ github.event.pull_request.base.ref }}
+        path: ${{ inputs.analyze_directory }}/base
+
+    - name: Compare with base branch bundle
+      shell: bash
+      if: success()
+      env:
+        INPUT_METAFILES: ${{ inputs.metafiles }}
+        INPUT_NAME: ${{ inputs.name }}
+        INPUT_ANALYZE_DIRECTORY: ${{ inputs.analyze_directory }}
+        INPUT_BUDGET_PERCENT_INCREASE_RED: ${{ inputs.budget_percent_increase_red }}
+        INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
+        INPUT_SKIP_COMMENT_IF_EMPTY: ${{ inputs.skip_comment_if_empty }}
+      run: |
+        node ${{ github.action_path }}/dist/index.mjs
+
+    - name: Upload bundle analysis on default branch
+      uses: actions/upload-artifact@v4
+      if: success() && github.ref_name == github.event.repository.default_branch
+      with:
+        name: bundle
+        path: ${{ inputs.analyze_directory }}/bundle_analysis.json
+
+    - name: Get Comment Body
+      shell: bash
+      id: get-comment-body
+      if: success() && github.event.number
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
+      run: |
+        echo "body<<EOF" >> $GITHUB_OUTPUT
+        echo "$(cat ${{ inputs.analyze_directory }}/bundle_analysis_comment.txt)" >> $GITHUB_OUTPUT
+        echo EOF >> $GITHUB_OUTPUT
+
+    - name: Find Comment
+      uses: peter-evans/find-comment@v3
+      if: success() && github.event.number
+      id: fc
+      with:
+        issue-number: ${{ github.event.number }}
+        body-includes: '<!-- __ESBUILD_BUNDLE_${{ inputs.name }} -->'
+
+    - name: Create Comment
+      uses: peter-evans/create-or-update-comment@v4
+      if: success() && github.event.number && steps.fc.outputs.comment-id == 0
+      with:
+        issue-number: ${{ github.event.number }}
+        body: ${{ steps.get-comment-body.outputs.body }}
+
+    - name: Update Comment
+      uses: peter-evans/create-or-update-comment@v4
+      if: success() && github.event.number && steps.fc.outputs.comment-id != 0
+      with:
+        issue-number: ${{ github.event.number }}
+        body: ${{ steps.get-comment-body.outputs.body }}
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        edit-mode: replace

@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"lib": ["es2022"],
+		"module": "es2022",
+		"target": "es2022",
+		"allowJs": true,
+		"noImplicitAny": true,
+		"esModuleInterop": true,
+		"strict": true,
+		"moduleResolution": "Bundler",
+		"sourceMap": true,
+		"noEmit": true,
+		"skipLibCheck": true,
+		"experimentalDecorators": true,
+		"types": ["node"],
+		"baseUrl": "./"
+	},
+	"include": ["src"]
+}
