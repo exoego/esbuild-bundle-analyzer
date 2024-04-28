@@ -6,68 +6,51 @@ Analyzes each PR's impact on esbuild bundle size
 
 ## Usage
 
-### 
+### Basic
 
 ```yaml
 # Ensure you build your project before running this action
 - name: Run esbuild
   run: npm run build
 
+# Call this action after the build
 - name: Analyze esbuild bundle size
   uses: exoego/esbuild-bundle-analyzer@main
   with:
     metafiles: "out/meta.json"
 ```
 
-###
-
-## Action inputs
-
-### `metafiles (string)`
-
-(Required) A comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]). Must be non-empty.
-
-As of esbuild v0.20.0, you need to write the meta file by yourself after build, something like this:
+As of esbuild v0.20.0, you need to [write
+***meta file*** yourself after build](https://esbuild.github.io/api/#metafile), something like this:
 
 ```javascript
+// esbuild.mjs
 import * as esbuild from 'esbuild'
 import fs from 'node:fs'
 
 let result = await esbuild.build({
-  entryPoints: ['src/app1.js', 'src/app2.js'],
-  bundle: true,
-  metafile: true,
-  outdir: 'dist',
+    entryPoints: ['src/app1.ts', 'src/app2.ts'],
+    bundle: true,
+    metafile: true,
+    outdir: 'dist',
 })
 
 fs.writeFileSync('dist/meta.json', JSON.stringify(result.metafile))
 ```
 
-In this case, the `metafiles` config should be `"dist/meta.json"`.
+In this case, the `metafiles` input should be `"dist/meta.json"`.
 
-Typically, you only need one meta file since one meta file can contain multiple out files information.
-Multiple meta files may be useful for more complex scenarios.
+If you have multiple meta files, you can specify them like this `"dist/meta1.json,dist/meta2.json"`.
 
-### `analyze_directory (string)`
+## Action inputs
 
-(Optional, defaults to `.analyzer`) If an out file size has increased more than this percent, display a "‼️" to draw attention
-to the change.
-
-### `budget_percent_increase_red (number)`
-
-(Optional, defaults to `20`) If an out file size has increased more than this percent, display a "‼️" to draw attention
-to the change.
-
-### `showDetails (boolean)`
-
-(Optional, defaults to `true`) This option renders a collapsed "details" section explaining some of the finer details of
-the numbers provided and icons. If you feel like this is not necessary and you and/or those working on your project
-understand the details, you can set this option to `false` and that section will not render.
-
-### `skipCommentIfEmpty (boolean)`
-
-(Optional, defaults to `false`) When set to `true`, if no out files have changed size, the generated comment will be an
-empty string.
+Name   | Default | Description
+-------|---------|------------
+`metafiles` | - | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]).
+`analyze_directory` | `.analyzer` | A path to working directory where bundle analysis are stored.
+`budget_percent_increase_red` | `20` | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.
+`show_details` | `true` | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
+`skip_comment_if_empty` | `false` | If `true` and no out files have changed size, the generated comment will be an empty string.
 
 ## Action outputs
 
