@@ -38,13 +38,13 @@ inputs:
       A path to working directory where bundle analysis are stored.
   budget_percent_increase_red:
     required: false
-    default: 20
+    default: "20"
     description: |
       If an out file size has increased more than this percent, display a "‼️" to draw attention
       to the change.
   show_details:
     required: false
-    default: true
+    default: "true"
     description: |
       If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
 

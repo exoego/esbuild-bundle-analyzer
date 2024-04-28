@@ -44,13 +44,13 @@ If you have multiple meta files, you can specify them like this `"dist/meta1.jso
 
 ## Action inputs
 
-Name   | Default | Description
--------|---------|------------
-`metafiles` | - | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]).
-`name` | `${{ github.event.repository.name }}` | The name of your project. This will be used in the comment header.
-`analyze_directory` | `.analyzer` | A path to working directory where bundle analysis are stored.
-`budget_percent_increase_red` | `20` | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.
-`show_details` | `true` | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
+| Name                          | Default                               | Description                                                                                                      |
+|-------------------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `metafiles`                   | -                                     | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]).    |
+| `name`                        | `${{ github.event.repository.name }}` | The name of your project. This will be used in the comment header.                                               |
+| `analyze_directory`           | `.analyzer`                           | A path to working directory where bundle analysis are stored.                                                    |
+| `budget_percent_increase_red` | `20`                                  | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.  |
+| `show_details`                | `true`                                | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons. |
 
 ## Action outputs
 
