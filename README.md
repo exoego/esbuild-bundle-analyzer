@@ -1,5 +1,7 @@
 # esbuild-bundle-analyzer GitHub Action
 
+[![test](https://github.com/exoego/esbuild-bundle-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/exoego/esbuild-bundle-analyzer/actions/workflows/ci.yml)
+
 Analyzes each PR's impact on esbuild bundle size
 
 ![comment-example](/doc/comment.png "Comment Example")
