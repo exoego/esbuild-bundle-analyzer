@@ -15,7 +15,8 @@ Analyzes each PR's impact on esbuild bundle size
 
 # Call this action after the build
 - name: Analyze esbuild bundle size
-  uses: exoego/esbuild-bundle-analyzer@main
+  # uses: exoego/esbuild-bundle-analyzer@main # If you prefer nightly!
+  uses: exoego/esbuild-bundle-analyzer@v1
   with:
     metafiles: "out/meta.json"
 ```
