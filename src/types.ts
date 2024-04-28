@@ -19,5 +19,4 @@ export interface Options {
 	analyzerDirectory: string;
 	budgetPercentIncreaseRed: number;
 	showDetails: boolean;
-	skipCommentIfEmpty: boolean;
 }

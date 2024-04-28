@@ -21,9 +21,6 @@ function getOptions(): Options {
 		showDetails: ["true", "True", "TRUE"].includes(
 			getInput("show_details") || "true",
 		),
-		skipCommentIfEmpty: ["true", "True", "TRUE"].includes(
-			getInput("skip_comment_if_empty") || "false",
-		),
 		name,
 		analyzerDirectory: getInput("analyze_directory") || ".analyzer",
 		metafiles: rawMetafiles.split(","),

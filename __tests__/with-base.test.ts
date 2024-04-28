@@ -29,7 +29,6 @@ describe("examples w/ base analysis", () => {
 				metafiles,
 				name: "test",
 				showDetails: false,
-				skipCommentIfEmpty: false,
 			};
 
 			beforeEach(() => {
