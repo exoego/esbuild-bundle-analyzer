@@ -62,4 +62,4 @@ No outputs are provided by this action at this time.
 
 ## License
 
-[MIT](LICENSE.md)
+[MIT](LICENSE)
