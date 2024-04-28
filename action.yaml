@@ -102,3 +102,6 @@ runs:
         body-path: ${{ inputs.analyze_directory }}/bundle_analysis_comment.txt
         comment-id: ${{ steps.fc.outputs.comment-id }}
         edit-mode: replace
+branding:
+  icon: 'package'
+  color: 'yellow'
