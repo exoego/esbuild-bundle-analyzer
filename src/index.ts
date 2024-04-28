@@ -21,7 +21,7 @@ function getOptions(): Options {
 		showDetails: ["true", "True", "TRUE"].includes(
 			getInput("show_details") || "true",
 		),
-		skipCommentIfEmpty: ["false", "False", "FALSE"].includes(
+		skipCommentIfEmpty: ["true", "True", "TRUE"].includes(
 			getInput("skip_comment_if_empty") || "false",
 		),
 		name,
