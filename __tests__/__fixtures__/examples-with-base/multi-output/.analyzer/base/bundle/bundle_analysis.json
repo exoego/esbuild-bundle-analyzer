@@ -2,7 +2,7 @@
 	"out/meta.json -> out/no-change.js": {
 		"metafile": "out/meta.json",
 		"outfile": "out/no-change.js",
-		"bytes": 733152
+		"bytes": 733190
 	},
 	"out/meta.json -> out/decreased.js": {
 		"metafile": "out/meta.json",

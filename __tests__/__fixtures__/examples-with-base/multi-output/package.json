@@ -3,10 +3,13 @@
 	"version": "1.0.0",
 	"description": "test",
 	"dependencies": {
+		"@jitl/quickjs-wasmfile-release-sync": "^0.29.1",
+		"quickjs-emscripten-core": "^0.29.1",
 		"hono": "4.2.7",
 		"@aws-sdk/client-s3": "3.556.0"
 	},
 	"devDependencies": {
+		"@chialab/esbuild-plugin-meta-url": "^0.18.2",
 		"esbuild": "0.20.2",
 		"typescript": "^5.4.5"
 	},

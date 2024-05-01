@@ -16,6 +16,7 @@ export interface CompareResult {
 export interface Options {
 	name: string;
 	metafiles: Array<string>;
+	includeExtensions: Array<string>;
 	analyzerDirectory: string;
 	budgetPercentIncreaseRed: number;
 	showDetails: boolean;

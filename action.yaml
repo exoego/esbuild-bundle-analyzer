@@ -36,6 +36,11 @@ inputs:
     default: ".analyzer"
     description: |
       A path to working directory where bundle analysis are stored.
+  include_extensions:
+    required: false
+    default: ".js,.cjs,.mjs"
+    description: |
+      A comma-separated list of file extension to be included in the analysis table.
   percent_extra_attention:
     required: false
     default: "20"
@@ -67,6 +72,7 @@ runs:
         INPUT_METAFILES: ${{ inputs.metafiles }}
         INPUT_NAME: ${{ inputs.name }}
         INPUT_ANALYZE_DIRECTORY: ${{ inputs.analyze_directory }}
+        INPUT_INCLUDE_EXTENSIONS: ${{ inputs.include_extensions }}
         INPUT_PERCENT_EXTRA_ATTENTION: ${{ inputs.percent_extra_attention }}
         INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
       run: |

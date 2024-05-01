@@ -21,6 +21,9 @@ function getOptions(): Options {
 		showDetails: ["true", "True", "TRUE"].includes(
 			getInput("show_details") || "true",
 		),
+		includeExtensions: (
+			getInput("include_extensions") || ".js,.mjs,.cjs"
+		).split(","),
 		name,
 		analyzerDirectory: getInput("analyze_directory") || ".analyzer",
 		metafiles: rawMetafiles.split(","),
