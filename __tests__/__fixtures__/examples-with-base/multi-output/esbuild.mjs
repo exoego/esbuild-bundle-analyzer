@@ -1,5 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { build } from "esbuild";
+import metaUrlPlugin from '@chialab/esbuild-plugin-meta-url';
 
 const result = await build({
 	entryPoints: [
@@ -8,6 +9,7 @@ const result = await build({
 		`./src/much-increased.ts`,
 		`./src/decreased.ts`,
 		`./src/new-outfile.ts`,
+		`./src/file-imported.ts`,
 	],
 	outdir: `out`,
 	format: "esm",
@@ -16,7 +18,10 @@ const result = await build({
 	platform: "node",
 	target: "node20.9",
 	bundle: true,
-	plugins: [],
+	plugins: [
+		metaUrlPlugin(),
+	],
+	sourcemap: true,
 });
 
 writeFileSync(`out/meta.json`, JSON.stringify(result.metafile, null, 2));
