@@ -26,6 +26,7 @@ describe("examples w/ base analysis", () => {
 			const input: Options = {
 				analyzerDirectory: ".analyzer",
 				budgetPercentIncreaseRed: 20,
+				includeExtensions: [".js", ".mjs", ".cjs"],
 				metafiles,
 				name: "test",
 				showDetails: false,
@@ -45,6 +46,9 @@ describe("examples w/ base analysis", () => {
 
 				const comment = readAnalysisComment(input.analyzerDirectory);
 				expect(comment).not.toMatch(/no changes to the esbuild bundle/i);
+				expect(comment).not.include(".js.map");
+				expect(comment).not.include(".wasm");
+				expect(comment).toMatch(/\.[cm]?js /i);
 				expect(comment).toMatch(/‼️ \+\d+/);
 				expect(comment).toMatch(/⚠️ \+\d+/);
 				expect(comment).toMatch(/✅ {2}-\d+/);

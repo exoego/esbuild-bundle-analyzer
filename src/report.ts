@@ -35,6 +35,13 @@ function getAllPageSizes(input: Options): Report {
 		const metaFileJson = loadMetaFile(metaFilePath);
 		Object.entries(metaFileJson.outputs).reduce((acc, output) => {
 			const [outfile, buildMeta] = output;
+			if (
+				!input.includeExtensions.some((ext) =>
+					outfile.toLowerCase().endsWith(ext),
+				)
+			) {
+				return acc;
+			}
 			acc[`${metafile} -> ${outfile}`] = {
 				bytes: buildMeta.bytes,
 				metafile,
