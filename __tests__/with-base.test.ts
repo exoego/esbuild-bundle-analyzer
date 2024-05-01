@@ -25,7 +25,7 @@ describe("examples w/ base analysis", () => {
 
 			const input: Options = {
 				analyzerDirectory: ".analyzer",
-				budgetPercentIncreaseRed: 20,
+				percentExtraAttention: 20,
 				includeExtensions: [".js", ".mjs", ".cjs"],
 				metafiles,
 				name: "test",

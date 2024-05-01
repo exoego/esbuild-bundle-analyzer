@@ -18,6 +18,6 @@ export interface Options {
 	metafiles: Array<string>;
 	includeExtensions: Array<string>;
 	analyzerDirectory: string;
-	budgetPercentIncreaseRed: number;
+	percentExtraAttention: number;
 	showDetails: boolean;
 }

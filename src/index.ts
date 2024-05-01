@@ -14,7 +14,7 @@ function getOptions(): Options {
 		throw new Error("name is not specified");
 	}
 	return {
-		budgetPercentIncreaseRed: Number.parseInt(
+		percentExtraAttention: Number.parseInt(
 			getInput("percent_extra_attention") || "20",
 			10,
 		),
