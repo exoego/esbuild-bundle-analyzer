@@ -16,7 +16,7 @@ describe("examples w/o base analysis", () => {
 		describe(`example ${example.name}`, () => {
 			const input: Options = {
 				analyzerDirectory: ".analyzer",
-				budgetPercentIncreaseRed: 20,
+				percentExtraAttention: 20,
 				includeExtensions: [".js", ".mjs", ".cjs"],
 				metafiles: ["out/meta.json"],
 				name: "test",
