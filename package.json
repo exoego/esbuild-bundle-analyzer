@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/exoego/esbuild-bundle-analysis#readme",
   "dependencies": {
+    "echarts": "^5.5.0",
     "filesize": "^10.1.1"
   },
   "devDependencies": {
