@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild'
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 
 // https://github.com/evanw/esbuild/issues/1685#issuecomment-944916409
 const excludeNodeModulesFromSourceMap = {
@@ -18,7 +18,7 @@ const excludeNodeModulesFromSourceMap = {
   },
 };
 
-await esbuild.build({
+const result = await esbuild.build({
   entryPoints: [`./src/index.ts`],
   outfile: `dist/index.mjs`,
   format: 'esm',
@@ -30,3 +30,5 @@ await esbuild.build({
   bundle: true,
   plugins: [excludeNodeModulesFromSourceMap]
 })
+
+writeFileSync(`tmp/meta.json`, JSON.stringify(result.metafile, null, 2));

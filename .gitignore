@@ -3,6 +3,7 @@
 node_modules
 out
 .analyzer
+tmp/meta.json
 
 # Allow-list
 !__tests__/__fixtures__/examples-with-base/**/.analyzer/base/bundle/bundle_analysis.json

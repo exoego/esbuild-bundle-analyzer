@@ -9,6 +9,11 @@ on:
     paths-ignore:
       - '*.md'
 
+permissions:
+  contents: read # for checkout repository
+  actions: read # for fetching base branch bundle stats
+  pull-requests: write # for comments
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,6 +39,10 @@ jobs:
           else
             echo 'clean'
           fi
+      - name: Analyze esbuild bundle size
+        uses: exoego/esbuild-bundle-analyzer@main
+        with:
+          metafiles: "tmp/meta.json"
       - uses: actions/upload-artifact@v4
         with:
           name: dist
