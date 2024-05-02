@@ -11,16 +11,29 @@ Analyzes each PR's impact on esbuild bundle size
 ### Basic
 
 ```yaml
-# Ensure you build your project before running this action
-- name: Run esbuild
-  run: npm run build
+permissions:
+  contents: read # for checkout repository
+  actions: read # for fetching base branch bundle stats
+  pull-requests: write # for comments
 
-# Call this action after the build
-- name: Analyze esbuild bundle size
-  # uses: exoego/esbuild-bundle-analyzer@main # If you prefer nightly!
-  uses: exoego/esbuild-bundle-analyzer@v1
-  with:
-    metafiles: "out/meta.json"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    # ... 
+    # (snip)
+    # ... 
+    # Ensure you build your project before running this action
+    - name: Run esbuild
+      run: npm run build
+    
+    # Call this action after the build
+    - name: Analyze esbuild bundle size
+      # uses: exoego/esbuild-bundle-analyzer@main # If you prefer nightly!
+      uses: exoego/esbuild-bundle-analyzer@v1
+      with:
+        metafiles: "out/meta.json"
 ```
 
 As of esbuild v0.20.0, you need to [write
@@ -44,6 +57,17 @@ fs.writeFileSync('dist/meta.json', JSON.stringify(result.metafile))
 In this case, the `metafiles` input should be `"dist/meta.json"`.
 
 If you have multiple meta files, you can specify them like this `"dist/meta1.json,dist/meta2.json"`.
+
+## Permissions
+
+This action requires the following permissions:
+
+```yaml
+permissions:
+  contents: read # for checkout repository
+  actions: read # for fetching base branch bundle stats
+  pull-requests: write # for comments
+```
 
 ## Action inputs
 
