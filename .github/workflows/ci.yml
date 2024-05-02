@@ -34,6 +34,10 @@ jobs:
           else
             echo 'clean'
           fi
+      - name: Analyze esbuild bundle size
+        uses: exoego/esbuild-bundle-analyzer@main
+        with:
+          metafiles: "tmp/meta.json"
       - uses: actions/upload-artifact@v4
         with:
           name: dist
