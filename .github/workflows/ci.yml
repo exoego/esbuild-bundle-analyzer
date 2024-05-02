@@ -9,6 +9,11 @@ on:
     paths-ignore:
       - '*.md'
 
+permissions:
+  contents: read # for checkout repository
+  actions: read # for fetching base branch bundle stats
+  pull-requests: write # for comments
+
 jobs:
   build:
     runs-on: ubuntu-latest
