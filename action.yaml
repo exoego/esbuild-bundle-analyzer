@@ -85,13 +85,6 @@ runs:
         name: bundle
         path: ${{ inputs.analyze_directory }}/bundle_analysis.json
 
-    - name: Upload images
-      uses: actions/upload-artifact@v4
-      if: success() && github.event.number
-      with:
-        name: bundle
-        path: ${{ inputs.analyze_directory }}/images/
-
     - name: Find Comment
       uses: peter-evans/find-comment@v3
       if: success() && github.event.number
