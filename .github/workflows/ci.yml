@@ -42,7 +42,7 @@ jobs:
       - name: Analyze esbuild bundle size
         uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb
         with:
-          uses: exoego/esbuild-bundle-analyzer@${{ github.ref_name }}
+          uses: exoego/esbuild-bundle-analyzer@${{ github.sha }}
           with: '{"metafiles": "tmp/meta.json"}'
       - uses: actions/upload-artifact@v4
         with:
