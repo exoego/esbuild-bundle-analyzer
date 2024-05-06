@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "test",
 	"dependencies": {
-		"@aws-sdk/client-s3": "^3.556.0"
+		"rambda": "^9.2.0"
 	},
 	"devDependencies": {
 		"esbuild": "^0.20.2",

@@ -11,6 +11,7 @@ export interface CompareResult {
 	bytes: number;
 	diff: number;
 	remark: "added" | "deleted" | "increased" | "decreased";
+	tree: TreeMapNode | undefined;
 }
 
 export interface Options {
@@ -20,4 +21,12 @@ export interface Options {
 	analyzerDirectory: string;
 	percentExtraAttention: number;
 	showDetails: boolean;
+}
+
+export interface TreeMapNode {
+	value: number;
+	name: string;
+	color?: Array<string>;
+	path: string;
+	children: TreeMapNode[];
 }
