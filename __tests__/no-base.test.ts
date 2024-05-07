@@ -18,7 +18,7 @@ describe("examples w/o base analysis", () => {
 				analyzerDirectory: ".analyzer",
 				percentExtraAttention: 20,
 				includeExtensions: [".js", ".mjs", ".cjs"],
-				metafiles: ["out/meta.json"],
+				metafiles: ["out/**/meta.json"],
 				name: "test",
 				showDetails: false,
 			};
