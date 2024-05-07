@@ -2,10 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
-import type { Options, Report } from "./types";
+import type { Input, Report } from "./types";
 import { loadMetaFile } from "./utils";
 
-export function report(input: Options): void {
+export function report(input: Input): void {
 	const allPageSizes = getAllPageSizes(input);
 	fs.mkdirSync(path.join(process.cwd(), input.analyzerDirectory), {
 		recursive: true,
@@ -19,7 +19,7 @@ export function report(input: Options): void {
 	console.log(`Wrote ${resultJsonPath}`);
 }
 
-function getAllPageSizes(input: Options): Report {
+function getAllPageSizes(input: Input): Report {
 	const acc: Report = {};
 	return input.metafiles.reduce((acc, metafile) => {
 		const metaFilePath = path.join(process.cwd(), metafile);

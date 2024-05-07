@@ -2,7 +2,7 @@ import { execSync } from "node:child_process";
 import path from "node:path";
 import { compare } from "../src/compare";
 import { report } from "../src/report";
-import type { Options } from "../src/types";
+import type { Input } from "../src/types";
 import {
 	createDummyBaseAnalysis,
 	getExampleDirectories,
@@ -14,7 +14,7 @@ describe("examples w/o base analysis", () => {
 	const fixturesPath = path.join(__dirname, "__fixtures__", "examples");
 	for (const example of getExampleDirectories(fixturesPath)) {
 		describe(`example ${example.name}`, () => {
-			const input: Options = {
+			const input: Input = {
 				analyzerDirectory: ".analyzer",
 				percentExtraAttention: 20,
 				includeExtensions: [".js", ".mjs", ".cjs"],

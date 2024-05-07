@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { CompareResult, Options, Report, TreeMapNode } from "./types";
+import type { CompareResult, Input, Report, TreeMapNode } from "./types";
 import { loadAnalysisJson, loadMetaFile } from "./utils";
 
-export function compare(input: Options): void {
+export function compare(input: Input): void {
 	let hasAnyChange = false;
 	let output = `## 📦 esbuild Bundle Analysis for ${input.name}
 
@@ -71,7 +71,7 @@ function treeKey(metafile: string, outfile: string): string {
 
 // Write the output to a file which is later read in
 // as comment contents by the actions workflow.
-function writeComment(input: Options, output: string): void {
+function writeComment(input: Input, output: string): void {
 	fs.mkdirSync(path.join(process.cwd(), input.analyzerDirectory), {
 		recursive: true,
 	});
@@ -85,7 +85,7 @@ function writeComment(input: Options, output: string): void {
 	);
 }
 
-function detail(input: Options): string {
+function detail(input: Input): string {
 	if (!input.showDetails) {
 		return "";
 	}
@@ -102,7 +102,7 @@ function detail(input: Options): string {
 </details>\n`;
 }
 
-function loadBaseAnalysisJson(input: Options): Report {
+function loadBaseAnalysisJson(input: Input): Report {
 	try {
 		return loadAnalysisJson(
 			path.join(
@@ -118,7 +118,7 @@ function loadBaseAnalysisJson(input: Options): Report {
 	}
 }
 
-function buildFileTree(input: Options) {
+function buildFileTree(input: Input) {
 	function buildRoot(
 		input: Record<string, { bytesInOutput: number }>,
 	): TreeMapNode {
