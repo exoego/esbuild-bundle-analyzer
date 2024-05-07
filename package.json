@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/exoego/esbuild-bundle-analysis#readme",
   "dependencies": {
+    "glob": "^10.3.12"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
