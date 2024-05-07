@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { filesize as originalFilesize } from "filesize";
 import type { CompareResult, Options, Report, TreeMapNode } from "./types";
 import { loadAnalysisJson, loadMetaFile } from "./utils";
 
@@ -174,10 +173,23 @@ function buildFileTree(input: Options) {
 	return trees;
 }
 
+const spacer = " ";
 function filesize(bytes: number): string {
-	return originalFilesize(bytes, {
-		spacer: " ",
-	});
+	const sign = bytes < 0 ? "-" : "";
+	const n = Math.abs(bytes);
+	if (n < 1000) {
+		return `${sign}${n}${spacer}B`;
+	}
+	if (n < 1000 * 1000) {
+		return `${sign}${(n / 1000).toFixed(2)}${spacer}KB`;
+	}
+	if (n < 1000 * 1000 * 1000) {
+		return `${sign}${(n / 1000 / 1000).toFixed(2)}${spacer}MB`;
+	}
+	if (n < 1000 * 1000 * 1000 * 1000) {
+		return `${sign}${(n / 1000 / 1000 / 1000).toFixed(2)}${spacer}GB`;
+	}
+	throw new Error("Too large file size!! Are you sure?");
 }
 
 function markdownTable(
