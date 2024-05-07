@@ -260,7 +260,7 @@ function fileSizeTable(
 	}
 	let output = "";
 	output += "<details>\n";
-	output += "<summary>Top ten largest paths</summary>\n";
+	output += "<summary>Largest paths</summary>\n";
 	output += `These visualization shows top ${topNLargestPaths} largest paths in the bundle.\n`;
 	for (const d of data) {
 		output += "\n";
