@@ -1,4 +1,4 @@
-import { writeFileSync } from "node:fs";
+import {mkdirSync, writeFileSync} from "node:fs";
 import { build } from "esbuild";
 
 const result = await build({
@@ -17,4 +17,5 @@ const result = await build({
 	assetNames: "resources/[name]-[hash]",
 });
 
-writeFileSync(`out/meta.json`, JSON.stringify(result.metafile, null, 2));
+mkdirSync(`out/foo`, { recursive: true });
+writeFileSync(`out/foo/meta.json`, JSON.stringify(result.metafile, null, 2));

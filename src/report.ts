@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
+import * as console from "node:console";
+import { globSync } from "glob";
 import type { Input, Report } from "./types";
 import { loadMetaFile } from "./utils";
 
@@ -19,20 +21,37 @@ export function report(input: Input): void {
 	console.log(`Wrote ${resultJsonPath}`);
 }
 
+interface MetafilePath {
+	readonly relativePath: string;
+	readonly absolutePath: string;
+}
+
+export function findMetafiles(input: Input): MetafilePath[] {
+	return input.metafiles.flatMap((metafile) => {
+		return globSync(path.join(process.cwd(), metafile), {
+			nodir: true,
+		}).map((metaFilePath) => {
+			return {
+				relativePath: path.relative(process.cwd(), metaFilePath),
+				absolutePath: metaFilePath,
+			};
+		});
+	});
+}
+
 function getAllPageSizes(input: Input): Report {
 	const acc: Report = {};
-	return input.metafiles.reduce((acc, metafile) => {
-		const metaFilePath = path.join(process.cwd(), metafile);
+	return findMetafiles(input).reduce((acc, { relativePath, absolutePath }) => {
 		try {
-			fs.accessSync(metaFilePath, fs.constants.R_OK);
+			fs.accessSync(absolutePath, fs.constants.R_OK);
 		} catch (err) {
 			console.error(
-				`No meta file found at "${metaFilePath}" - a path to meta file may be wrong, or esbuild is not executed.`,
+				`No meta file found at "${absolutePath}" - a path to meta file may be wrong, or esbuild is not executed.`,
 			);
 			process.exit(1);
 		}
 
-		const metaFileJson = loadMetaFile(metaFilePath);
+		const metaFileJson = loadMetaFile(absolutePath);
 		Object.entries(metaFileJson.outputs).reduce((acc, output) => {
 			const [outfile, buildMeta] = output;
 			if (
@@ -42,9 +61,9 @@ function getAllPageSizes(input: Input): Report {
 			) {
 				return acc;
 			}
-			acc[`${metafile} -> ${outfile}`] = {
+			acc[`${relativePath} -> ${outfile}`] = {
 				bytes: buildMeta.bytes,
-				metafile,
+				metafile: relativePath,
 				outfile,
 			};
 			return acc;

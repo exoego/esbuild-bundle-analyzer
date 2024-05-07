@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { findMetafiles } from "./report";
 import type { CompareResult, Input, Report, TreeMapNode } from "./types";
 import { loadAnalysisJson, loadMetaFile } from "./utils";
 
@@ -160,11 +161,11 @@ function buildFileTree(input: Input) {
 		// Skip building tree if we don't need it.
 		return trees;
 	}
-	for (const metafile of input.metafiles) {
-		const metafileJson = loadMetaFile(path.join(process.cwd(), metafile));
+	for (const { relativePath, absolutePath } of findMetafiles(input)) {
+		const metafileJson = loadMetaFile(absolutePath);
 		for (const [outfile, buildMeta] of Object.entries(metafileJson.outputs)) {
 			const tree = buildRoot(buildMeta.inputs);
-			trees.set(treeKey(metafile, outfile), tree);
+			trees.set(treeKey(relativePath, outfile), tree);
 
 			fs.writeFileSync(
 				path.join(process.cwd(), input.analyzerDirectory, "tree.json"),

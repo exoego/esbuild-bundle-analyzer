@@ -9,7 +9,9 @@ inputs:
   metafiles:
     required: true
     description: |
-      A comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]). Must be non-empty.
+      A comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]).
+      Must be non-empty.
+      Glob (`dist/**/meta.json`) is supported. 
       
       As of esbuild v0.20.0, you need to write the meta file by yourself after build, something like this:
       

@@ -73,7 +73,7 @@ permissions:
 
 | Name                      | Default                               | Description                                                                                                      |
 |---------------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `metafiles`               | -                                     | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]).    |
+| `metafiles`               | -                                     | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]). Glob (`dist/**/meta.json`) is supported. |
 | `name`                    | ${{ github.event.<br>repository.name }} | The name of your project. This will be used in the comment header.                                             |
 | `analyze_directory`       | `.analyzer`                           | A path to working directory where bundle analysis are stored.                                                    |
 | `include_extensions`      | `.js,.cjs,.mjs`                       | A comma-separated list of file extension to be included in the analysis table.                                   |
