@@ -52,6 +52,12 @@ inputs:
     default: "true"
     description: |
       If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
+  top_n_largest_paths:
+    required: false
+    default: "20"
+    description: |
+      The number of largest paths (e.g.) `node_modules/foo`) to be collected.
+      If 0 or lower, skipped.   
 
 runs:
   using: composite
@@ -75,6 +81,7 @@ runs:
         INPUT_INCLUDE_EXTENSIONS: ${{ inputs.include_extensions }}
         INPUT_PERCENT_EXTRA_ATTENTION: ${{ inputs.percent_extra_attention }}
         INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
+        INPUT_TOP_N_LARGEST_PATHS: ${{ inputs.top_n_largest_paths }}
       run: |
         node ${{ github.action_path }}/dist/index.mjs
 
