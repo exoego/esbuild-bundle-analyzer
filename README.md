@@ -79,6 +79,7 @@ permissions:
 | `include_extensions`      | `.js,.cjs,.mjs`                       | A comma-separated list of file extension to be included in the analysis table.                                   |
 | `percent_extra_attention` | `20`                                  | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.  |
 | `show_details`            | `true`                                | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons. |
+| `top_n_largest_paths`     | `20`                                  | The number of largest paths (e.g.) `node_modules/foo`) to be collected. If 0 or lower, skipped.                  |
 
 ## Action outputs
 

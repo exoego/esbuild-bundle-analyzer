@@ -21,6 +21,10 @@ function getOptions(): Options {
 		showDetails: ["true", "True", "TRUE"].includes(
 			getInput("show_details") || "true",
 		),
+		topNLargestPaths: Number.parseInt(
+			getInput("top_n_largest_paths") || "20",
+			10,
+		),
 		includeExtensions: (
 			getInput("include_extensions") || ".js,.mjs,.cjs"
 		).split(","),

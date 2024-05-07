@@ -18,6 +18,7 @@ export interface Options {
 	name: string;
 	metafiles: Array<string>;
 	includeExtensions: Array<string>;
+	topNLargestPaths: number;
 	analyzerDirectory: string;
 	percentExtraAttention: number;
 	showDetails: boolean;
