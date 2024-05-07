@@ -2,7 +2,7 @@ import { execSync } from "node:child_process";
 import path from "node:path";
 
 import { run } from "../src/index";
-import type { Options } from "../src/types";
+import type { Input } from "../src/types";
 import {
 	getExampleDirectories,
 	readAnalysisComment,
@@ -23,7 +23,7 @@ describe("examples w/ base analysis", () => {
 					? ["out/meta1.json", "out/meta2.json"]
 					: ["out/meta.json"];
 
-			const input: Options = {
+			const input: Input = {
 				analyzerDirectory: ".analyzer",
 				percentExtraAttention: 20,
 				includeExtensions: [".js", ".mjs", ".cjs"],

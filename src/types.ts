@@ -14,7 +14,7 @@ export interface CompareResult {
 	tree: TreeMapNode | undefined;
 }
 
-export interface Options {
+export interface Input {
 	name: string;
 	metafiles: Array<string>;
 	includeExtensions: Array<string>;

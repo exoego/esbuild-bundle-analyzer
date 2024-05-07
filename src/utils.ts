@@ -16,7 +16,7 @@ export function loadAnalysisJson(path: string): Report {
 }
 
 // https://github.com/actions/toolkit/blob/81a73aba8bedd532f6eddcc41ed3a0fad8b1cfeb/packages/core/src/core.ts#L126
-export function getInput(name: string): string {
+export function getSingleInput(name: string): string {
 	const val = process.env[`INPUT_${name.toUpperCase()}`] || "";
 	return val.trim();
 }
