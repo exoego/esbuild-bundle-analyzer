@@ -1,0 +1,27 @@
+name: Bump major version
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.ACTIONS_BOT_TOKEN }}
+          fetch-depth: 0
+      - name: Git config
+        run: |
+          git config user.name actions-bot
+          git config user.email actions-bot@users.noreply.github.com
+      - name: Tag new target
+        run: |
+          major_version=$(echo "${{ github.ref_name }}" | cut -d'.' -f1)
+          git tag -f $major_version ${{ github.ref_name }}
+      - name: Push new tag
+        run: |
+          major_version=$(echo "${{ github.ref_name }}" | cut -d'.' -f1)
+          git push origin $major_version --force
