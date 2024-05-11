@@ -40,15 +40,18 @@ jobs:
             echo 'clean'
           fi
       - name: Analyze esbuild bundle size
+        if: github.event_name == 'pull_request'
         uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb
         with:
           uses: exoego/esbuild-bundle-analyzer@${{ github.sha }}
           with: '{"metafiles": "tmp/meta.json"}'
       - uses: actions/upload-artifact@v4
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           name: dist
           path: dist
       - uses: actions/upload-artifact@v4
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           name: action.yaml
           path: action.yaml
