@@ -9,7 +9,7 @@ export interface CompareResult {
 	metafile: string;
 	outfile: string;
 	bytes: number;
-	diff: number;
+	baseBytes: number;
 	remark: "added" | "deleted" | "increased" | "decreased";
 	tree: TreeMapNode | undefined;
 }
