@@ -23,6 +23,7 @@ const result = await esbuild.build({
   outfile: `dist/index.mjs`,
   format: 'esm',
   metafile: true,
+  minify: true,
   mainFields: ['module', 'main'],
   platform: 'node',
   target: 'node18',
