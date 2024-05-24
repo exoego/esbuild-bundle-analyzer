@@ -4,14 +4,14 @@ on:
     branches: [main]
     paths-ignore:
       - '*.md'
-  pull_request:
+  pull_request_target:
     branches: [main]
+    types: [assigned, opened, synchronize, reopened]
 
 permissions:
   contents: read # for checkout repository
   actions: read # for fetching base branch bundle stats
   pull-requests: write # for comments
-  issues: write # for comments
 
 jobs:
   build:
