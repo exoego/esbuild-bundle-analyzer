@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths-ignore:
       - '*.md'
+  pull_request:
+    branches: [main]
   pull_request_target:
     branches: [main]
     types: [opened, edited, synchronize, reopened]
@@ -40,6 +42,7 @@ jobs:
           fi
       - name: Analyze esbuild bundle size
         uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb
+        if: github.event.pull_request.head.repo.full_name == github.repository
         with:
           uses: exoego/esbuild-bundle-analyzer@${{ github.sha }}
           with: '{"metafiles": "tmp/meta.json"}'
