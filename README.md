@@ -15,6 +15,7 @@ permissions:
   contents: read # for checkout repository
   actions: read # for fetching base branch bundle stats
   pull-requests: write # for comments
+  issues: write # for comments
 
 jobs:
   build:
@@ -81,6 +82,7 @@ permissions:
   contents: read # for checkout repository
   actions: read # for fetching base branch bundle stats
   pull-requests: write # for comments
+  issues: write # for comments
 ```
 
 ## Action inputs
