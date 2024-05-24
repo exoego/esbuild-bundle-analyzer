@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths-ignore:
       - '*.md'
+  pull_request:
+    branches: [main]
+  pull_request_target:
     branches: [main]
     types: [opened, edited, synchronize, reopened]
 
