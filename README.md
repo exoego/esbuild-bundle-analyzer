@@ -8,7 +8,7 @@ Analyzes each PR's impact on esbuild bundle size
 
 ## Usage
 
-### Basic
+### GitHub Action setup
 
 ```yaml
 permissions:
@@ -36,8 +36,22 @@ jobs:
         metafiles: "out/meta.json"
 ```
 
-As of esbuild v0.20.0, you need to [write
-***meta file*** yourself after build](https://esbuild.github.io/api/#metafile), something like this:
+### esbuild setup
+
+You need to [write ***meta file*** yourself after build](https://esbuild.github.io/api/#metafile).
+
+If you use esbuild CLI, your build script in package.json should have `--metafile=out/meta.json` or such, something like this:
+
+```json5
+{
+  "scripts": {
+    "build": "esbuild ./src/lambda.ts --bundle --metafile=out/meta.json ......."
+  },
+  // ...
+}
+```
+
+If you use esbuild API, something like this:
 
 ```javascript
 // esbuild.mjs
@@ -54,9 +68,9 @@ let result = await esbuild.build({
 fs.writeFileSync('dist/meta.json', JSON.stringify(result.metafile))
 ```
 
-In this case, the `metafiles` input should be `"dist/meta.json"`.
+For both cases, the `metafiles` input for GitHub Action will be `"dist/meta.json"`.
 
-If you have multiple meta files, you can specify them like this `"dist/meta1.json,dist/meta2.json"`.
+If you have multiple meta files, you can specify them like this `"dist/meta1.json,dist/meta2.json"` or `"dist/meta*.json`.
 
 ## Permissions
 
