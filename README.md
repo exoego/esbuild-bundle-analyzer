@@ -21,10 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    # ... 
-    # (snip)
-    # ... 
     # Ensure you build your project before running this action
+    # For example,
+    # - uses: actions/checkout@v4
+    # - uses: actions/setup-node@v4
+    #   with:
+    #     node-version: 20
+    #     cache: 'npm'
+    #     cache-dependency-path: subdir/package-lock.json
+    # - run: npm ci
     - name: Run esbuild
       run: npm run build
     
