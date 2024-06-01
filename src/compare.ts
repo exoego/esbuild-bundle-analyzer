@@ -110,16 +110,19 @@ function detail(input: Input): string {
 
 function loadBaseAnalysisJson(input: Input): Report {
 	try {
-		return loadAnalysisJson(
+		const report = loadAnalysisJson(
 			path.join(
 				process.cwd(),
 				input.analyzerDirectory,
 				"base/bundle/bundle_analysis.json",
 			),
 		);
+		console.info("Base analysis found.", report);
+		return report;
 	} catch (e) {
-		// Empty if no base analysis found.
-		// This is a case when analyzer is first set up or all artifacts are expired.
+		console.warn(
+			"No base analysis found. First setup or all artifacts are expired.",
+		);
 		return {};
 	}
 }
