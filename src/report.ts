@@ -18,7 +18,7 @@ export function report(input: Input): void {
 		"bundle_analysis.json",
 	);
 	fs.writeFileSync(resultJsonPath, JSON.stringify(allPageSizes, null, 2));
-	console.log(`Wrote ${resultJsonPath}`);
+	console.log(`Wrote ${resultJsonPath}`, allPageSizes);
 }
 
 interface MetafilePath {
@@ -41,7 +41,9 @@ export function findMetafiles(input: Input): MetafilePath[] {
 
 function getAllPageSizes(input: Input): Report {
 	const acc: Report = {};
-	return findMetafiles(input).reduce((acc, { relativePath, absolutePath }) => {
+
+	const metafiles = findMetafiles(input);
+	const result = metafiles.reduce((acc, { relativePath, absolutePath }) => {
 		try {
 			fs.accessSync(absolutePath, fs.constants.R_OK);
 		} catch (err) {
@@ -70,4 +72,7 @@ function getAllPageSizes(input: Input): Report {
 		}, acc);
 		return acc;
 	}, acc);
+	console.log("Found metafiles", metafiles);
+	console.log("Found result", result);
+	return result;
 }
