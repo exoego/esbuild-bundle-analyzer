@@ -8,7 +8,7 @@ Analyzes each PR's impact on esbuild bundle size
 
 ## Usage
 
-### GitHub Action setup
+### GitHub Action setup for private repositories
 
 ```yaml
 name: esbuild-bundle-analyzer
@@ -16,37 +16,25 @@ name: esbuild-bundle-analyzer
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
-  ## Uncomment the following `pull_request_target` if your repository may receive PRs from forks.
-  ## Because `Pull_request_target` event should be used on PRs from forks due to GITHUB_TOKEN permission limitations.
-  #pull_request_target:
-  #  branches: [main]
-
-permissions:
-  contents: read # for checkout repository
-  actions: read # for fetching base branch bundle stats
-  pull-requests: write # for comments
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    ## Uncomment the following `if` if your repository may receive PRs from forks.
-    ## Because `Pull_request_target` event should be used on PRs from forks due to GITHUB_TOKEN permission limitations.
-    #if: |
-    #  ( github.event.pull_request.head.repo.fork && github.event_name == 'pull_request_target') ||
-    #  (!github.event.pull_request.head.repo.fork && github.event_name != 'pull_request_target')
+    permissions:
+      contents: read # for checkout repository
+      actions: read # for fetching base branch bundle stats
+      pull-requests: write # for comments
     steps:
     # Ensure you build your project before running this action
     # For example,
-    # - uses: actions/checkout@v4
-    # - uses: actions/setup-node@v4
-    #   with:
-    #     node-version: 20
-    #     cache: 'npm'
-    #     cache-dependency-path: subdir/package-lock.json
-    # - run: npm ci
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: subdir/package-lock.json
+    - run: npm ci
     - name: Run esbuild
       run: npm run build
     
@@ -58,12 +46,55 @@ jobs:
         metafiles: "out/meta.json"
 ```
 
-### 
 
-If your repository is public, you need to use `pull_request_target` event to run this action on PRs from forks.
+### GitHub Action setup for public repositories
 
+If your repository is public and you want to run this action on PRs from forks, you may need to use `pull_request_target` event.
+By using `pull_request_target` event, GitHub grant GitHub Actions to modify pull requests even on PRs from forks.
+Please refer [Permissions for the GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_tokenThis should be used carefully https://github.com/actions/labeler?tab=readme-ov-file#notes-regarding-pull_request_target-event) and use this carefully.
 
+```yaml
+name: esbuild-bundle-analyzer
 
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
+
+jobs:
+  # PLEASE AVOID ADDING OTHER JOBS IN THIS FILE
+  # BECAUSE THIS ACTION USE `pull_request_target` EVENT that grants write permissions to GitHub Actions running on PRs from forks.
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read # for checkout repository
+      actions: read # for fetching base branch bundle stats
+      pull-requests: write # for comments    
+    steps:
+    # Ensure you build your project before running this action
+    # For example,
+    - uses: actions/checkout@v4
+      with:
+        # This is required to fetch the commit SHA of the forked PR
+        ref: "${{ github.event.pull_request.merge_commit_sha }}"
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: subdir/package-lock.json
+    - run: npm ci
+    - name: Run esbuild
+      run: npm run build
+    
+    # Call this action after the build
+    - name: Analyze esbuild bundle size
+      # uses: exoego/esbuild-bundle-analyzer@main # If you prefer nightly!
+      uses: exoego/esbuild-bundle-analyzer@v1
+      with:
+        metafiles: "out/meta.json"
+```
 
 ### esbuild setup
 

@@ -4,23 +4,17 @@ on:
     branches: [main]
     paths-ignore:
       - '*.md'
-  pull_request:
-    branches: [main]
   pull_request_target:
     branches: [main]
 
-permissions:
-  contents: read # for checkout repository
-  actions: read # for fetching base branch bundle stats
-  pull-requests: write # for comments
-
 jobs:
   build:
+    permissions:
+      contents: read # for checkout repository
+      actions: read # for fetching base branch bundle stats
+      pull-requests: write # for comments
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: |
-      ( github.event.pull_request.head.repo.fork && github.event_name == 'pull_request_target') ||
-      (!github.event.pull_request.head.repo.fork && github.event_name != 'pull_request_target')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
