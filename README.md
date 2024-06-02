@@ -22,7 +22,6 @@ on:
   ## Because `Pull_request_target` event should be used on PRs from forks due to GITHUB_TOKEN permission limitations.
   #pull_request_target:
   #  branches: [main]
-  #  types: [opened, edited, synchronize, reopened]
 
 permissions:
   contents: read # for checkout repository
