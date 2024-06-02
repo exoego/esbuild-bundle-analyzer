@@ -112,6 +112,11 @@ permissions:
   pull-requests: write # for comments
 ```
 
+This action uses the `GITHUB_TOKEN` provided by GitHub Actions.
+Due to security limitation, `GITHUB_TOKEN` is not granted to write comments on PRs from forks on `pull_request` event.
+Instead, [`pull_request_target` event should be used on PRs from forks to overcome this limitation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
+Please check the above setup example to use this action with `pull_request_target`.
+
 ## Action inputs
 
 | Name                      | Default                               | Description                                                                                                      |
