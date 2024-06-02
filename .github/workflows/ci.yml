@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     if: |
-      (github.event.pull_request.head.repo.fork == true && github.event_name == 'pull_request_target') ||
-      (github.event.pull_request.head.repo.fork != true && github.event_name != 'pull_request_target')
+      ( github.event.pull_request.head.repo.fork && github.event_name == 'pull_request_target') ||
+      (!github.event.pull_request.head.repo.fork && github.event_name != 'pull_request_target')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
