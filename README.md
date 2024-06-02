@@ -11,15 +11,32 @@ Analyzes each PR's impact on esbuild bundle size
 ### GitHub Action setup
 
 ```yaml
+name: esbuild-bundle-analyzer
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  ## Uncomment the following `pull_request_target` if your repository may receive PRs from forks.
+  ## Because `Pull_request_target` event should be used on PRs from forks due to GITHUB_TOKEN permission limitations.
+  #pull_request_target:
+  #  branches: [main]
+
 permissions:
   contents: read # for checkout repository
   actions: read # for fetching base branch bundle stats
   pull-requests: write # for comments
 
 jobs:
-  build:
+  analyze:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    ## Uncomment the following `if` if your repository may receive PRs from forks.
+    ## Because `Pull_request_target` event should be used on PRs from forks due to GITHUB_TOKEN permission limitations.
+    #if: |
+    #  ( github.event.pull_request.head.repo.fork && github.event_name == 'pull_request_target') ||
+    #  (!github.event.pull_request.head.repo.fork && github.event_name != 'pull_request_target')
     steps:
     # Ensure you build your project before running this action
     # For example,
@@ -40,6 +57,13 @@ jobs:
       with:
         metafiles: "out/meta.json"
 ```
+
+### 
+
+If your repository is public, you need to use `pull_request_target` event to run this action on PRs from forks.
+
+
+
 
 ### esbuild setup
 
@@ -87,6 +111,11 @@ permissions:
   actions: read # for fetching base branch bundle stats
   pull-requests: write # for comments
 ```
+
+This action uses the `GITHUB_TOKEN` provided by GitHub Actions.
+Due to security limitation, `GITHUB_TOKEN` is not granted to write comments on PRs from forks on `pull_request` event.
+Instead, [`pull_request_target` event should be used on PRs from forks to overcome this limitation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
+Please check the above setup example to use this action with `pull_request_target`.
 
 ## Action inputs
 
