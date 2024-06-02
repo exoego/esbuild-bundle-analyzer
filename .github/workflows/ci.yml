@@ -6,6 +6,9 @@ on:
       - '*.md'
   pull_request:
     branches: [main]
+  pull_request_target:
+    branches: [main]
+    types: [opened, edited, synchronize, reopened]
 
 permissions:
   contents: read # for checkout repository
@@ -16,6 +19,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    if: |
+      (github.event.pull_request.head.repo.fork == true && github.event_name == 'pull_request_target') ||
+      (github.event.pull_request.head.repo.fork != true && github.event_name != 'pull_request_target')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
