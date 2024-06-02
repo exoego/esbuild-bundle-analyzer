@@ -18,7 +18,7 @@ export function report(input: Input): void {
 		"bundle_analysis.json",
 	);
 	fs.writeFileSync(resultJsonPath, JSON.stringify(allPageSizes, null, 2));
-	console.log(`Wrote ${resultJsonPath}`);
+	console.log(`Wrote ${resultJsonPath}`, allPageSizes);
 }
 
 interface MetafilePath {
