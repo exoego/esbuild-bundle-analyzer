@@ -8,7 +8,7 @@ Analyzes each PR's impact on esbuild bundle size
 
 ## Usage
 
-### GitHub Action setup for private repositories
+### GitHub Action setup for 🔐private repositories
 
 ```yaml
 name: esbuild-bundle-analyzer
