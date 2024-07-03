@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "test:run": "vitest --run",
-    "build": "npm run check && node esbuild.mjs",
+    "build": "node esbuild.mjs",
     "check": "tsc && biome check --apply ."
   },
   "repository": {
