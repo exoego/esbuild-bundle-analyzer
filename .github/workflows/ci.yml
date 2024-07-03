@@ -27,6 +27,7 @@ jobs:
       - run: npm run build
       - name: Check uncommited file
         run: |
+          git diff
           git_diff_stat=$(git diff --stat)
           if [[ $git_diff_stat != '' ]]; then
             echo "Uncommitted file found. Ensure you have run tests and committed all changes."
