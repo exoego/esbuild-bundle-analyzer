@@ -229,7 +229,7 @@ function markdownTable(
 		.join("");
 
 	return `
-Meta File | Out File  | Size (raw) | Note 
+Meta File | Out File  | Size (raw) | Note
 ----------|----------|-----------:|------
 ${rows}`;
 }

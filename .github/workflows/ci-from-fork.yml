@@ -1,4 +1,4 @@
-name: bundle analysis
+name: CI (from fork)
 on:
   push:
     branches: [main]
@@ -16,7 +16,7 @@ jobs:
       pull-requests: write # for comments
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: github.event.pull_request.user.login == 'exoego'
+    if: github.event.pull_request.user.login != 'exoego'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
