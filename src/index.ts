@@ -21,6 +21,9 @@ function getInput(): Input {
 		showDetails: ["true", "True", "TRUE"].includes(
 			getSingleInput("show_details") || "true",
 		),
+		showNoChange: ["true", "True", "TRUE"].includes(
+			getSingleInput("show_no_change") || "true",
+		),
 		topNLargestPaths: Number.parseInt(
 			getSingleInput("top_n_largest_paths") || "20",
 			10,

@@ -22,6 +22,7 @@ export interface Input {
 	analyzerDirectory: string;
 	percentExtraAttention: number;
 	showDetails: boolean;
+	showNoChange: boolean;
 }
 
 export interface TreeMapNode {

@@ -16,13 +16,16 @@ describe("examples w/ base analysis", () => {
 		"examples-with-base",
 	);
 
-	for (const example of getExampleDirectories(fixturesPath)) {
+	for (const [index, example] of getExampleDirectories(
+		fixturesPath,
+	).entries()) {
 		describe(`example ${example.name}`, () => {
 			const metafiles =
 				example.name === "multi-metafiles"
 					? ["out/meta1.json", "out/meta2.json"]
 					: ["out/meta.json"];
 
+			const isEven = index % 2 === 0;
 			const input: Input = {
 				analyzerDirectory: ".analyzer",
 				percentExtraAttention: 20,
@@ -30,6 +33,8 @@ describe("examples w/ base analysis", () => {
 				metafiles,
 				name: "test",
 				showDetails: false,
+				showNoChange: isEven,
+				topNLargestPaths: 10,
 			};
 
 			beforeEach(() => {
@@ -53,6 +58,11 @@ describe("examples w/ base analysis", () => {
 				expect(comment).toMatch(/⚠️ \+\d+/);
 				expect(comment).toMatch(/✅ {2}-\d+/);
 				expect(comment).toMatch(/✅ {2}No change/i);
+				if (isEven) {
+					expect(comment).not.toMatch(/\d bundles with no change are hidden./i);
+				} else {
+					expect(comment).toMatch(/\d bundles with no change are hidden./i);
+				}
 				expect(comment).toMatch(/🆕 Added/i);
 				expect(comment).toMatch(/🗑️ Deleted/i);
 			});
