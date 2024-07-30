@@ -53,7 +53,10 @@ jobs:
 
 If your repository is public and you want to run this action on PRs from forks, you may need to use `pull_request_target` event.
 By using `pull_request_target` event, GitHub grant GitHub Actions to modify pull requests even on PRs from forks.
-Please refer [Permissions for the GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_tokenThis should be used carefully https://github.com/actions/labeler?tab=readme-ov-file#notes-regarding-pull_request_target-event) and use this carefully.
+
+> [!WARNING]
+> Please refer [Permissions for the GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token).
+> This should be used carefully https://github.com/actions/labeler?tab=readme-ov-file#notes-regarding-pull_request_target-event) and use this carefully.
 
 ```yaml
 name: esbuild-bundle-analyzer
