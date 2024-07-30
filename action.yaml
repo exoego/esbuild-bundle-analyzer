@@ -54,6 +54,11 @@ inputs:
     default: "true"
     description: |
       If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
+  show_no_change_bundles:
+    required: false
+    default: "true"
+    description: |
+      If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown.
   top_n_largest_paths:
     required: false
     default: "20"
@@ -83,6 +88,7 @@ runs:
         INPUT_INCLUDE_EXTENSIONS: ${{ inputs.include_extensions }}
         INPUT_PERCENT_EXTRA_ATTENTION: ${{ inputs.percent_extra_attention }}
         INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
+        INPUT_SHOW_NO_CHANGE: ${{ inputs.show_no_change }}
         INPUT_TOP_N_LARGEST_PATHS: ${{ inputs.top_n_largest_paths }}
       run: |
         node ${{ github.action_path }}/dist/index.mjs

@@ -21,6 +21,8 @@ describe("examples w/o base analysis", () => {
 				metafiles: ["out/**/meta.json"],
 				name: "test",
 				showDetails: false,
+				showNoChange: true,
+				topNLargestPaths: 10,
 			};
 
 			beforeEach(() => {
