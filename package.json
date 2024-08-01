@@ -35,6 +35,6 @@
     "@biomejs/biome": "^1.8.3",
     "esbuild": "^0.23.0",
     "vitest": "^2.0.5",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.4"
   }
 }
