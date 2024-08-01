@@ -31,7 +31,7 @@
     "glob": "^10.4.2"
   },
   "devDependencies": {
-    "@types/node": "^20.14.9",
+    "@types/node": "^22.0.2",
     "@biomejs/biome": "^1.8.3",
     "esbuild": "^0.23.0",
     "vitest": "^2.0.5",
