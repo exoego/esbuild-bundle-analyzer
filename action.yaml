@@ -56,7 +56,7 @@ inputs:
       If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
   show_no_change:
     required: false
-    default: "true"
+    default: "false"
     description: |
       If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown.
   top_n_largest_paths:
