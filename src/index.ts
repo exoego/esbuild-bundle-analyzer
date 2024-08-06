@@ -22,7 +22,7 @@ function getInput(): Input {
 			getSingleInput("show_details") || "true",
 		),
 		showNoChange: ["true", "True", "TRUE"].includes(
-			getSingleInput("show_no_change") || "true",
+			getSingleInput("show_no_change"),
 		),
 		topNLargestPaths: Number.parseInt(
 			getSingleInput("top_n_largest_paths") || "20",
