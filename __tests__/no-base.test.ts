@@ -22,6 +22,7 @@ describe("examples w/o base analysis", () => {
 				name: "test",
 				showDetails: false,
 				showNoChange: true,
+				collapseChanges: false,
 				topNLargestPaths: 10,
 			};
 
