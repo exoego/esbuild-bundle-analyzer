@@ -34,6 +34,7 @@ describe("examples w/ base analysis", () => {
 				name: "test",
 				showDetails: false,
 				showNoChange: isEven,
+				collapseChanges: !isEven,
 				topNLargestPaths: 10,
 			};
 
@@ -53,15 +54,17 @@ describe("examples w/ base analysis", () => {
 				expect(comment).not.toMatch(/no changes to the esbuild bundle/i);
 				expect(comment).not.include(".js.map");
 				expect(comment).not.include(".wasm");
-				expect(comment).toMatch(/\.[cm]?js /i);
-				expect(comment).toMatch(/‼️ \+\d+/);
-				expect(comment).toMatch(/⚠️ \+\d+/);
-				expect(comment).toMatch(/✅ {2}-\d+/);
-				expect(comment).toMatch(/✅ {2}No change/i);
 				if (isEven) {
+					expect(comment).toMatch(/\.[cm]?js /i);
+					expect(comment).toMatch(/‼️ \+\d+/);
+					expect(comment).toMatch(/⚠️ \+\d+/);
+					expect(comment).toMatch(/✅ {2}-\d+/);
+					expect(comment).toMatch(/✅ {2}No change/i);
 					expect(comment).not.toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).not.toMatch("View analysis table");
 				} else {
 					expect(comment).toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).toMatch("View analysis table");
 				}
 				expect(comment).toMatch(/🆕 Added/i);
 				expect(comment).toMatch(/🗑️ Deleted/i);

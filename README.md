@@ -163,6 +163,7 @@ Please check the above setup example to use this action with `pull_request_targe
 | `percent_extra_attention` | `20`                                  | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.  |
 | `show_details`            | `true`                                | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons. |
 | `show_no_change`          | `false`                               | If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown. |
+| `collapse_changes`        | `false`                               | If `true`, hide the analysis table inside an accordion. If `false`, display the analysis table directly. |
 | `top_n_largest_paths`     | `20`                                  | The number of largest paths (e.g.) `node_modules/foo`) to be collected. If 0 or lower, skipped.                  |
 
 ## Action outputs

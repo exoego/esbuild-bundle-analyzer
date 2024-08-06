@@ -23,6 +23,7 @@ export interface Input {
 	percentExtraAttention: number;
 	showDetails: boolean;
 	showNoChange: boolean;
+	collapseChanges: boolean;
 }
 
 export interface TreeMapNode {

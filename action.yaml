@@ -59,6 +59,11 @@ inputs:
     default: "true"
     description: |
       If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown.
+  collapse_changes:
+    required: false
+    default: "false"
+    description: |
+      If `true`, hide the analysis table inside an accordion. If `false`, display the analysis table directly.
   top_n_largest_paths:
     required: false
     default: "20"
@@ -89,6 +94,7 @@ runs:
         INPUT_PERCENT_EXTRA_ATTENTION: ${{ inputs.percent_extra_attention }}
         INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
         INPUT_SHOW_NO_CHANGE: ${{ inputs.show_no_change }}
+        INPUT_COLLAPSE_CHANGES: ${{ inputs.collapse_changes }}
         INPUT_TOP_N_LARGEST_PATHS: ${{ inputs.top_n_largest_paths }}
       run: |
         node ${{ github.action_path }}/dist/index.mjs
