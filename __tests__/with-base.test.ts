@@ -72,10 +72,10 @@ describe("examples w/ base analysis", () => {
 				expect(comment).toMatch(/✅ {2}-\d+/);
 				expect(comment).toMatch(/✅ {2}No change/i);
 				if (isEven) {
-					expect(comment).not.toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).not.toMatch(/\d bundles are hidden./i);
 					expect(comment).toMatch(/\(Total\) \| - \|.+⚠️/i);
 				} else {
-					expect(comment).toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).toMatch(/\d bundles are hidden./i);
 					expect(comment).not.toMatch(/\(Total\) \| - \|.+⚠️/i);
 				}
 				expect(comment).toMatch(/🆕 Added/i);

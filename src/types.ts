@@ -10,14 +10,11 @@ export interface CompareResult {
 	outfile: string;
 	bytes: number;
 	baseBytes: number;
-	remark: "added" | "deleted" | "increased" | "decreased";
+	remark: "added" | "deleted" | "increased" | "decreased" | "no-change";
 	tree: TreeMapNode | undefined;
 }
 
-export type SizeComparisonFilter =
-	| CompareResult["remark"]
-	| "total"
-	| "no-change";
+export type SizeComparisonFilter = CompareResult["remark"] | "total";
 
 export interface Input {
 	name: string;
