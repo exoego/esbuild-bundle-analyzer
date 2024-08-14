@@ -23,6 +23,7 @@ describe("examples w/o base analysis", () => {
 				showDetails: false,
 				showNoChange: true,
 				topNLargestPaths: 10,
+				showTotalChanges: false,
 			};
 
 			beforeEach(() => {
