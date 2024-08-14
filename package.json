@@ -7,7 +7,7 @@
     "test": "vitest",
     "test:run": "vitest --run",
     "build": "node esbuild.mjs",
-    "check": "tsc && biome check --apply ."
+    "check": "tsc && biome check --write ."
   },
   "repository": {
     "type": "git",
