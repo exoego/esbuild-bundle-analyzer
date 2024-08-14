@@ -14,16 +14,20 @@ export interface CompareResult {
 	tree: TreeMapNode | undefined;
 }
 
+export type SizeComparisonFilter =
+	| CompareResult["remark"]
+	| "total"
+	| "no-change";
+
 export interface Input {
 	name: string;
 	metafiles: Array<string>;
 	includeExtensions: Array<string>;
+	includeSizeComparison: Set<SizeComparisonFilter>;
 	topNLargestPaths: number;
 	analyzerDirectory: string;
 	percentExtraAttention: number;
 	showDetails: boolean;
-	showNoChange: boolean;
-	showTotalChanges: boolean;
 }
 
 export interface TreeMapNode {
