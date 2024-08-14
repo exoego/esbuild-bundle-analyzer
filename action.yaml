@@ -49,11 +49,13 @@ inputs:
     description: |
       If an out file size has increased more than this percent, display a "‼️" to draw attention
       to the change.
-  show_total_changes:
+  include_size_comparison:
     required: false
-    default: "false"
+    default: "added, deleted, increased, decreased, no-change"
     description: |
-      If `true`, the cumulative number of changes in bundle sizes is rendered.
+      A comma-separated list of size comparison items to be displayed.
+      Available filter are `total`, `added`, `deleted`, `increased`, `decreased` and `no-change`.
+      If you are not interested in some of them, you can remove them from the list.
   show_details:
     required: false
     default: "true"
@@ -62,6 +64,8 @@ inputs:
   show_no_change:
     required: false
     default: "true"
+    deprecationMessage: |
+      Use the `include_size_comparison` list to show/hide `no-change`.
     description: |
       If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown.
   top_n_largest_paths:

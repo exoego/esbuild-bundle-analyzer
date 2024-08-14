@@ -18,12 +18,17 @@ describe("examples w/o base analysis", () => {
 				analyzerDirectory: ".analyzer",
 				percentExtraAttention: 20,
 				includeExtensions: [".js", ".mjs", ".cjs"],
+				includeSizeComparison: new Set([
+					"added",
+					"deleted",
+					"increased",
+					"decreased",
+					"no-change",
+				]),
 				metafiles: ["out/**/meta.json"],
 				name: "test",
 				showDetails: false,
-				showNoChange: true,
 				topNLargestPaths: 10,
-				showTotalChanges: false,
 			};
 
 			beforeEach(() => {

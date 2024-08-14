@@ -10,20 +10,21 @@ export interface CompareResult {
 	outfile: string;
 	bytes: number;
 	baseBytes: number;
-	remark: "added" | "deleted" | "increased" | "decreased";
+	remark: "added" | "deleted" | "increased" | "decreased" | "no-change";
 	tree: TreeMapNode | undefined;
 }
+
+export type SizeComparisonFilter = CompareResult["remark"] | "total";
 
 export interface Input {
 	name: string;
 	metafiles: Array<string>;
 	includeExtensions: Array<string>;
+	includeSizeComparison: Set<SizeComparisonFilter>;
 	topNLargestPaths: number;
 	analyzerDirectory: string;
 	percentExtraAttention: number;
 	showDetails: boolean;
-	showNoChange: boolean;
-	showTotalChanges: boolean;
 }
 
 export interface TreeMapNode {

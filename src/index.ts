@@ -1,7 +1,8 @@
+import console from "node:console";
 import { pathToFileURL } from "node:url";
 import { compare } from "./compare";
 import { report } from "./report";
-import type { Input } from "./types";
+import type { Input, SizeComparisonFilter } from "./types";
 import { getBooleanInput, getNumberInput, getSingleInput } from "./utils";
 
 function getInput(): Input {
@@ -13,15 +14,48 @@ function getInput(): Input {
 	if (!name) {
 		throw new Error("name is not specified");
 	}
+	const filters = new Set<SizeComparisonFilter>(
+		(
+			getSingleInput("include_size_comparison") ||
+			"added, deleted, increased, decreased, no-change"
+		)
+			.split(",")
+			.map((s) => {
+				switch (s.trim()) {
+					case "added":
+					case "deleted":
+					case "increased":
+					case "decreased":
+					case "total":
+					case "no-change":
+						return s.trim() as SizeComparisonFilter;
+					default:
+						throw new Error(`Unknown size comparison filter: ${s}`);
+				}
+			}),
+	);
+	const rawShowNoChange = getSingleInput("show_no_change");
+	if (rawShowNoChange !== "") {
+		if (getBooleanInput("show_no_change", "true")) {
+			filters.delete("no-change");
+			console.log(
+				"`show_no_change: true` is deprecated. Instead, remove `no-change` from the `include_size_comparison` list.",
+			);
+		} else {
+			filters.add("no-change");
+			console.log(
+				"`show_no_change: false` is deprecated. Instead, add `no-change` to the `include_size_comparison` list.",
+			);
+		}
+	}
 	return {
 		percentExtraAttention: getNumberInput("percent_extra_attention", 20),
 		showDetails: getBooleanInput("show_details", "true"),
-		showNoChange: getBooleanInput("show_no_change", "true"),
-		showTotalChanges: getBooleanInput("show_total_changes", "false"),
 		topNLargestPaths: getNumberInput("top_n_largest_paths", 20),
 		includeExtensions: (
 			getSingleInput("include_extensions") || ".js,.mjs,.cjs"
 		).split(","),
+		includeSizeComparison: filters,
 		name,
 		analyzerDirectory: getSingleInput("analyze_directory") || ".analyzer",
 		metafiles: rawMetafiles.split(","),

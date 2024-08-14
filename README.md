@@ -48,7 +48,6 @@ jobs:
         metafiles: "out/meta.json"
 ```
 
-
 ### GitHub Action setup for public repositories
 
 If your repository is public and you want to run this action on PRs from forks, you may need to use `pull_request_target` event.
@@ -154,17 +153,17 @@ Please check the above setup example to use this action with `pull_request_targe
 
 ## Action inputs
 
-| Name                      | Default                               | Description                                                                                                      |
-|---------------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `metafiles`               | -                                     | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]). Glob (`dist/**/meta.json`) is supported. |
-| `name`                    | ${{ github.event.<br>repository.name }} | The name of your project. This will be used in the comment header.                                             |
-| `analyze_directory`       | `.analyzer`                           | A path to working directory where bundle analysis are stored.                                                    |
-| `include_extensions`      | `.js,.cjs,.mjs`                       | A comma-separated list of file extension to be included in the analysis table.                                   |
-| `percent_extra_attention` | `20`                                  | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.  |
-| `show_details`            | `true`                                | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons. |
-| `show_no_change`          | `true`                               | If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown. |
-| `show_total_changes`      | `false`                               | If `true`, the cumulative number of changes in bundle sizes is rendered.                                         |
-| `top_n_largest_paths`     | `20`                                  | The number of largest paths (e.g.) `node_modules/foo`) to be collected. If 0 or lower, skipped.                  |
+| Name                      | Default                                           | Description                                                                                                      |
+|---------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `metafiles`               | -                                                 | A required comma-separated list of paths to [esbuild's meta file]([https://esbuild.github.io/api/#metafile]). Glob (`dist/**/meta.json`) is supported. |
+| `name`                    | ${{ github.event.<br>repository.name }}           | The name of your project. This will be used in the comment header.                                               |
+| `analyze_directory`       | `.analyzer`                                       | A path to working directory where bundle analysis are stored.                                                    |
+| `include_extensions`      | `.js,.cjs,.mjs`                                   | A comma-separated list of file extension to be included in the analysis table.                                   |
+| `percent_extra_attention` | `20`                                              | If an out file size has increased more than this percent, display a "‼️" to draw extra attention to the change.  |
+| `include_size_comparison` | `added, deleted, increased, decreased, no-change` | A comma-separated list of size comparison items to be displayed.<br>Available filter are `total`, `added`, `deleted`, `increased`, `decreased` and `no-change`.<br>If you are not interested in some of them, you can remove them from the list. |
+| `show_details`            | `true`                                            | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons. |
+| `show_no_change`          | `true`                                            | [DEPRECATED] Use the `include_size_comparison` list to show/hide `no-change`.<br>If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown. |
+| `top_n_largest_paths`     | `20`                                              | The number of largest paths (e.g.) `node_modules/foo`) to be collected. If 0 or lower, skipped.                  |
 
 ## Action outputs
 

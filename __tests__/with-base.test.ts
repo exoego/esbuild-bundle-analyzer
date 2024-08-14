@@ -2,7 +2,7 @@ import { execSync } from "node:child_process";
 import path from "node:path";
 
 import { run } from "../src/index";
-import type { Input } from "../src/types";
+import type { Input, SizeComparisonFilter } from "../src/types";
 import {
 	getExampleDirectories,
 	readAnalysisComment,
@@ -26,6 +26,19 @@ describe("examples w/ base analysis", () => {
 					: ["out/meta.json"];
 
 			const isEven = index % 2 === 0;
+
+			const includeSizeComparison = new Set<SizeComparisonFilter>([
+				"total",
+				"added",
+				"deleted",
+				"increased",
+				"decreased",
+				"no-change",
+			]);
+			if (!isEven) {
+				includeSizeComparison.delete("total");
+				includeSizeComparison.delete("no-change");
+			}
 			const input: Input = {
 				analyzerDirectory: ".analyzer",
 				percentExtraAttention: 20,
@@ -33,9 +46,8 @@ describe("examples w/ base analysis", () => {
 				metafiles,
 				name: "test",
 				showDetails: false,
-				showNoChange: isEven,
 				topNLargestPaths: 10,
-				showTotalChanges: isEven,
+				includeSizeComparison,
 			};
 
 			beforeEach(() => {
@@ -60,10 +72,10 @@ describe("examples w/ base analysis", () => {
 				expect(comment).toMatch(/✅ {2}-\d+/);
 				expect(comment).toMatch(/✅ {2}No change/i);
 				if (isEven) {
-					expect(comment).not.toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).not.toMatch(/\d bundles are hidden./i);
 					expect(comment).toMatch(/\(Total\) \| - \|.+⚠️/i);
 				} else {
-					expect(comment).toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).toMatch(/\d bundles are hidden./i);
 					expect(comment).not.toMatch(/\(Total\) \| - \|.+⚠️/i);
 				}
 				expect(comment).toMatch(/🆕 Added/i);
