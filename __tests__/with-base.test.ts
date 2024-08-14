@@ -35,6 +35,7 @@ describe("examples w/ base analysis", () => {
 				showDetails: false,
 				showNoChange: isEven,
 				topNLargestPaths: 10,
+				showTotalChanges: isEven,
 			};
 
 			beforeEach(() => {
@@ -60,8 +61,10 @@ describe("examples w/ base analysis", () => {
 				expect(comment).toMatch(/✅ {2}No change/i);
 				if (isEven) {
 					expect(comment).not.toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).toMatch(/\(Total\) \| - \|.+⚠️/i);
 				} else {
 					expect(comment).toMatch(/\d bundles with no change are hidden./i);
+					expect(comment).not.toMatch(/\(Total\) \| - \|.+⚠️/i);
 				}
 				expect(comment).toMatch(/🆕 Added/i);
 				expect(comment).toMatch(/🗑️ Deleted/i);

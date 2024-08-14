@@ -49,6 +49,11 @@ inputs:
     description: |
       If an out file size has increased more than this percent, display a "‼️" to draw attention
       to the change.
+  show_total_changes:
+    required: false
+    default: "false"
+    description: |
+      If `true`, the cumulative number of changes in bundle sizes is rendered.
   show_details:
     required: false
     default: "true"
