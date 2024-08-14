@@ -20,3 +20,15 @@ export function getSingleInput(name: string): string {
 	const val = process.env[`INPUT_${name.toUpperCase()}`] || "";
 	return val.trim();
 }
+
+export function getBooleanInput(
+	name: string,
+	fallback: "true" | "false",
+): boolean {
+	return ["true", "True", "TRUE"].includes(getSingleInput(name) || fallback);
+}
+
+export function getNumberInput(name: string, fallback: number): number {
+	const raw = getSingleInput(name);
+	return raw === "" ? fallback : Number.parseInt(raw, 10);
+}

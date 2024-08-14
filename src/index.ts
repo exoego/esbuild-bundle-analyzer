@@ -2,7 +2,7 @@ import { pathToFileURL } from "node:url";
 import { compare } from "./compare";
 import { report } from "./report";
 import type { Input } from "./types";
-import { getSingleInput } from "./utils";
+import { getBooleanInput, getNumberInput, getSingleInput } from "./utils";
 
 function getInput(): Input {
 	const rawMetafiles = getSingleInput("metafiles");
@@ -14,23 +14,11 @@ function getInput(): Input {
 		throw new Error("name is not specified");
 	}
 	return {
-		percentExtraAttention: Number.parseInt(
-			getSingleInput("percent_extra_attention") || "20",
-			10,
-		),
-		showDetails: ["true", "True", "TRUE"].includes(
-			getSingleInput("show_details") || "true",
-		),
-		showNoChange: ["true", "True", "TRUE"].includes(
-			getSingleInput("show_no_change") || "true",
-		),
-		showTotalChanges: ["true", "True", "TRUE"].includes(
-			getSingleInput("show_total_changes") || "false",
-		),
-		topNLargestPaths: Number.parseInt(
-			getSingleInput("top_n_largest_paths") || "20",
-			10,
-		),
+		percentExtraAttention: getNumberInput("percent_extra_attention", 20),
+		showDetails: getBooleanInput("show_details", "true"),
+		showNoChange: getBooleanInput("show_no_change", "true"),
+		showTotalChanges: getBooleanInput("show_total_changes", "false"),
+		topNLargestPaths: getNumberInput("top_n_largest_paths", 20),
 		includeExtensions: (
 			getSingleInput("include_extensions") || ".js,.mjs,.cjs"
 		).split(","),
