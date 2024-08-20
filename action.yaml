@@ -63,7 +63,6 @@ inputs:
       If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons.
   show_no_change:
     required: false
-    default: "true"
     deprecationMessage: |
       Use the `include_size_comparison` list to show/hide `no-change`.
     description: |
