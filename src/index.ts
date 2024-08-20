@@ -37,12 +37,12 @@ function getInput(): Input {
 	const rawShowNoChange = getSingleInput("show_no_change");
 	if (rawShowNoChange !== "") {
 		if (getBooleanInput("show_no_change", "true")) {
-			filters.delete("no-change");
+			filters.add("no-change");
 			console.log(
 				"`show_no_change: true` is deprecated. Instead, remove `no-change` from the `include_size_comparison` list.",
 			);
 		} else {
-			filters.add("no-change");
+			filters.delete("no-change");
 			console.log(
 				"`show_no_change: false` is deprecated. Instead, add `no-change` to the `include_size_comparison` list.",
 			);
