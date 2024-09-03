@@ -234,9 +234,6 @@ function filesize(bytes: number): string {
 	throw new Error("Too large file size!! Are you sure?");
 }
 
-const shouldShowBundle = (d: CompareResult, showNoChange: boolean) =>
-	showNoChange || d.bytes - d.baseBytes !== 0;
-
 function markdownTable(
 	data: Array<CompareResult>,
 	sizeComparisonFilters: Set<SizeComparisonFilter>,
@@ -267,7 +264,7 @@ function markdownTable(
 		: [];
 
 	const individualRows = data.filter((d) =>
-		shouldShowBundle(d, sizeComparisonFilters.has(d.remark)),
+		sizeComparisonFilters.has(d.remark),
 	);
 	const rows = [...totalRows, ...individualRows]
 		.map((d) => {
@@ -297,7 +294,7 @@ function hiddenTable(
 			return `${d.metafile} | ${d.outfile} | ${renderSize(d)} | ${renderNote(
 				d,
 				redThreshold,
-			)}\n`;
+			)}<!-- HIDDEN -->\n`;
 		})
 		.join("");
 	if (hiddenBundles.length === 0) {
