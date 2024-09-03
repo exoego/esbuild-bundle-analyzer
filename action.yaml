@@ -94,6 +94,7 @@ runs:
         INPUT_NAME: ${{ inputs.name }}
         INPUT_ANALYZE_DIRECTORY: ${{ inputs.analyze_directory }}
         INPUT_INCLUDE_EXTENSIONS: ${{ inputs.include_extensions }}
+        INPUT_INCLUDE_SIZE_COMPARISON: ${{ inputs.include_size_comparison }}
         INPUT_PERCENT_EXTRA_ATTENTION: ${{ inputs.percent_extra_attention }}
         INPUT_SHOW_DETAILS: ${{ inputs.show_details }}
         INPUT_SHOW_NO_CHANGE: ${{ inputs.show_no_change }}
