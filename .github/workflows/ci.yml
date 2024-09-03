@@ -62,3 +62,12 @@ jobs:
           path: |
             dist/
             action.yaml
+
+  validate-action-yaml:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun scripts/validate-yaml.ts
