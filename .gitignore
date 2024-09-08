@@ -6,4 +6,4 @@ out
 tmp/meta.json
 
 # Allow-list
-!__tests__/__fixtures__/examples-with-base/**/.analyzer/base/bundle/bundle_analysis.json
+!__tests__/__fixtures__/**/.analyzer/base/bundle/bundle_analysis.json
