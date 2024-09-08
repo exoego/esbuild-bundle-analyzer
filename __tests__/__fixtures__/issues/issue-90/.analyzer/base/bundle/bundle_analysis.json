@@ -1,0 +1,32 @@
+{
+  "out/meta.json -> out/no-change-old.js": {
+    "bytes": 733190,
+    "metafile": "out/meta.json",
+    "outfile": "out/no-change-old.js"
+  },
+  "out/meta.json -> out/bit-increased-old.js": {
+    "bytes": 44674,
+    "metafile": "out/meta.json",
+    "outfile": "out/bit-increased-old.js"
+  },
+  "out/meta.json -> out/much-increased-old.js": {
+    "bytes": 44678,
+    "metafile": "out/meta.json",
+    "outfile": "out/much-increased-old.js"
+  },
+  "out/meta.json -> out/decreased-old.js": {
+    "bytes": 44658,
+    "metafile": "out/meta.json",
+    "outfile": "out/decreased-old.js"
+  },
+  "out/meta.json -> out/new-outfile-old.js": {
+    "bytes": 200,
+    "metafile": "out/meta.json",
+    "outfile": "out/new-outfile-old.js"
+  },
+  "out/meta.json -> out/file-imported-old.js": {
+    "bytes": 68068,
+    "metafile": "out/meta.json",
+    "outfile": "out/file-imported-old.js"
+  }
+}
