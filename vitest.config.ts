@@ -11,8 +11,7 @@ export default defineConfig({
     watch: true,
     exclude: [
       ...configDefaults.exclude,
-      '/node_modules/',
-      '/__fixtures__/'
+      '**/__fixtures__/**'
     ]
   }
 })
