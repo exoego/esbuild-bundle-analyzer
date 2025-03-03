@@ -13,6 +13,7 @@ export default defineConfig({
       reporter: ['lcov'],
     },
     watch: true,
+    includeSource: ['__tests__/**'],
     exclude: [
       ...configDefaults.exclude,
       '/node_modules/',
