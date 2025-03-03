@@ -8,6 +8,10 @@ export default defineConfig({
     clearMocks: true,
     globals: true,
     reporters: ['verbose'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['lcov'],
+    },
     watch: true,
     exclude: [
       ...configDefaults.exclude,

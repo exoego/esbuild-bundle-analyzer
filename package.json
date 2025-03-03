@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "test:run": "vitest --run",
+    "test:run": "vitest --run --coverage",
     "build": "node esbuild.mjs",
     "check": "tsc && biome check --write ."
   },
