@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "test:run": "vitest --run",
+    "test:run": "vitest --run --coverage",
     "build": "node esbuild.mjs",
     "check": "tsc && biome check --write ."
   },
@@ -31,11 +31,12 @@
     "glob": "^11.0.1"
   },
   "devDependencies": {
-    "@types/node": "^22.13.8",
     "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.13.8",
+    "@vitest/coverage-v8": "3.0.4",
     "esbuild": "^0.25.0",
-    "vitest": "^3.0.4",
     "typescript": "^5.8.2",
+    "vitest": "3.0.4",
     "yaml": "^2.7.0"
   }
 }
