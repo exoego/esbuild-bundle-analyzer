@@ -15,3 +15,7 @@ updates:
       day: "monday"
     labels:
       - "dependencies"
+    groups:
+      vitest:
+        patterns:
+          - "*vitest*"
