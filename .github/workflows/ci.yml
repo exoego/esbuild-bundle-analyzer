@@ -11,8 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    matrix:
-      node: [24.x, 20.x]
+    strategy:
+      fail-fast: true
+      matrix:
+        node: [24.x, 20.x]
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
