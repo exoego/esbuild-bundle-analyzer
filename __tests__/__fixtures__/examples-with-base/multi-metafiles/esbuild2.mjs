@@ -13,7 +13,7 @@ const result = await build({
 	metafile: true,
 	mainFields: ["module", "main"],
 	platform: "node",
-	target: "node20.9",
+	target: "node24",
 	bundle: true,
 	plugins: [],
 });
