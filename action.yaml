@@ -118,14 +118,14 @@ runs:
         body-includes: '<!-- __ESBUILD_BUNDLE_${{ inputs.name }} -->'
 
     - name: Create Comment
-      uses: peter-evans/create-or-update-comment@v4
+      uses: peter-evans/create-or-update-comment@v5
       if: success() && github.event.number && steps.fc.outputs.comment-id == 0
       with:
         issue-number: ${{ github.event.number }}
         body-path: ${{ inputs.analyze_directory }}/bundle_analysis_comment.txt
 
     - name: Update Comment
-      uses: peter-evans/create-or-update-comment@v4
+      uses: peter-evans/create-or-update-comment@v5
       if: success() && github.event.number && steps.fc.outputs.comment-id != 0
       with:
         issue-number: ${{ github.event.number }}
