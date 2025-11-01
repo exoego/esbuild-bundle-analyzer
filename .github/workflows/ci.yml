@@ -55,7 +55,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Analyze esbuild bundle size
-        uses: jenseng/dynamic-uses@5175289a9a87978dcfcb9cf512b821d23b2a53eb
+        uses: jenseng/dynamic-uses@26a7fa196ecfc98e02d08d65a09d03ab999683ae
         with:
           uses: exoego/esbuild-bundle-analyzer@${{ github.sha }}
           with: '{"metafiles": "tmp/meta.json"}'
