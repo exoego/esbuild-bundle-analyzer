@@ -103,7 +103,7 @@ runs:
         node ${{ github.action_path }}/dist/index.mjs
 
     - name: Upload bundle analysis on default branch
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       if: success() && github.ref_name == github.event.repository.default_branch
       with:
         name: bundle
