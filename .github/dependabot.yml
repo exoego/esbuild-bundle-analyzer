@@ -15,6 +15,11 @@ updates:
       day: "monday"
     labels:
       - "dependencies"
+    ignore:
+      - dependency-name: "node"
+        versions: ["25.x", "27.x", "29.x", "31.x"]
+      - dependency-name: "@types/node"
+        versions: ["25.x", "27.x", "29.x", "31.x"]
     groups:
       vitest:
         patterns:
