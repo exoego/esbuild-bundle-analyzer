@@ -78,7 +78,7 @@ runs:
   using: composite
   steps:
     - name: Download base branch bundle stats
-      uses: dawidd6/action-download-artifact@v12
+      uses: dawidd6/action-download-artifact@v14
       # Ok to continue on error since the base branch has no bundle analysis artifact for the first setup
       continue-on-error: true
       if: success() && github.event.number
