@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/exoego/esbuild-bundle-analysis#readme",
   "dependencies": {
-    "glob": "^13.0.0"
+    "glob": "^13.0.6"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.4",
