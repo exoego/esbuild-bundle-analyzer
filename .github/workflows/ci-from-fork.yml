@@ -30,7 +30,7 @@ jobs:
         with:
           uses: exoego/esbuild-bundle-analyzer@${{ github.sha }}
           with: '{"metafiles": "tmp/meta.json"}'
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           name: distribution
