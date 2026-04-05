@@ -3,6 +3,7 @@ import path from "node:path";
 import process from "node:process";
 
 import * as console from "node:console";
+import { globSync } from "glob";
 import type { Input, Report } from "./types";
 import { loadMetaFile } from "./utils";
 
@@ -27,10 +28,12 @@ interface MetafilePath {
 
 export function findMetafiles(input: Input): MetafilePath[] {
 	return input.metafiles.flatMap((metafile) => {
-		return fs.globSync(metafile, { cwd: process.cwd() }).map((relativePath) => {
+		return globSync(path.join(process.cwd(), metafile), {
+			nodir: true,
+		}).map((metaFilePath) => {
 			return {
-				relativePath,
-				absolutePath: path.join(process.cwd(), relativePath),
+				relativePath: path.relative(process.cwd(), metaFilePath),
+				absolutePath: metaFilePath,
 			};
 		});
 	});
