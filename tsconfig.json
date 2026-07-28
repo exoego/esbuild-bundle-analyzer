@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "jsx": "preserve",
-    "types": ["vitest/globals", "node"],
+    "types": ["@rstest/core/globals", "node"],
     "baseUrl": "."
   },
   "include": [

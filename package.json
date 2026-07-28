@@ -4,8 +4,8 @@
   "description": "Analyzes each PR's impact on esbuild bundle size",
   "type": "module",
   "scripts": {
-    "test": "vitest",
-    "test:run": "vitest --run --coverage",
+    "test": "rstest",
+    "test:run": "rstest --coverage",
     "build": "node esbuild.mjs",
     "check": "tsc && biome check --write ."
   },
@@ -32,11 +32,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.16",
+    "@rstest/core": "^0.11.4",
+    "@rstest/coverage-v8": "^0.11.4",
     "@types/node": "^26.1.0",
-    "@vitest/coverage-v8": "4.1.9",
     "esbuild": "^0.28.1",
     "typescript": "^5.9.3",
-    "vitest": "4.1.9",
     "yaml": "^2.9.0"
   }
 }
