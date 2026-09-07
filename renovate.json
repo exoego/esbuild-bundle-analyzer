@@ -4,5 +4,11 @@
     "config:recommended"
   ],
   "labels": ["dependencies"],
-  "minimumReleaseAge": "7 days"
+  "minimumReleaseAge": "7 days",
+  "packageRules": [
+    {
+      "groupName": "rstest packages",
+      "matchPackageNames": ["@rstest/**"]
+    }
+  ]
 }
