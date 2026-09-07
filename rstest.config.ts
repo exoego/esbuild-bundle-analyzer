@@ -8,7 +8,7 @@ export default defineConfig({
 	reporters: ["verbose"],
 	coverage: {
 		provider: "v8",
-		reporters: ["text"],
+		reporters: ["text", "lcov"],
 	},
 	exclude: ["**/__fixtures__/**"],
 });
