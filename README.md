@@ -165,6 +165,7 @@ Please check the above setup example to use this action with `pull_request_targe
 | `show_details`            | `true`                                            | If `true`, a collapsed "details" section is rendered. It explains the details of the numbers provided and icons. |
 | `show_no_change`          | `true`                                            | [DEPRECATED] Use the `include_size_comparison` list to show/hide `no-change`.<br>If `true`, all bundles are shown in the analysis regardless of size change. If `false`, only bundles with size changes are shown. |
 | `top_n_largest_paths`     | `20`                                              | The number of largest paths (e.g.) `node_modules/foo`) to be collected. If 0 or lower, skipped.                  |
+| `comment`                 | `true`                                            | If `false`, skip creating or updating the pull request comment. The analysis files are still produced.             |
 
 ## Action outputs
 
