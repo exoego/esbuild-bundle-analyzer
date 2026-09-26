@@ -110,7 +110,9 @@ runs:
     - name: Write bundle analysis to step summary
       if: success() && inputs.comment != 'true'
       shell: bash
-      run: cat "${{ inputs.analyze_directory }}/bundle_analysis_comment.txt" >> "$GITHUB_STEP_SUMMARY"
+      env:
+        ANALYZE_DIRECTORY: ${{ inputs.analyze_directory }}
+      run: cat "$ANALYZE_DIRECTORY/bundle_analysis_comment.txt" >> "$GITHUB_STEP_SUMMARY"
 
     - name: Upload bundle analysis on default branch
       uses: actions/upload-artifact@v7
